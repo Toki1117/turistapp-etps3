@@ -6,9 +6,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatOptionModule, MatLineModule } from '@angular/material/core';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [PageNotFoundComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
