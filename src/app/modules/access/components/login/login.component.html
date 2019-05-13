@@ -1,3 +1,25 @@
-<p>
-  login works!
-</p>
+<mat-card>
+  <mat-card-title>Acceso</mat-card-title>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+    <mat-form-field appearance="outline">
+      <mat-label>Usuario</mat-label>
+      <input 
+        required
+        formControlName="usuario" 
+        matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Clave</mat-label>
+      <input
+        type="password"
+        required
+        matInput
+        formControlName="clave">
+    </mat-form-field>
+    <button 
+      color="accent"
+      [disabled]="loginForm.invalid || loginForm.pending" 
+      mat-raised-button 
+      type="submit"> Ingresar </button>
+  </form>
+</mat-card>
