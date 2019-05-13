@@ -1,0 +1,25 @@
+@import "~src/mixins";
+
+.mat-card {
+  display: flex;
+  width: 100%;
+  flex-flow: column;
+  align-items: center;
+  @include sm {
+    width: fit-content;
+  } 
+
+  form {
+    display: flex;
+    flex-flow: column;
+  }
+}
+
+.login {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+}
