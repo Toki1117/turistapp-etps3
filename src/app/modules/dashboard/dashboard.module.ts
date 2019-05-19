@@ -7,6 +7,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SharedModule } from '../shared/shared.module';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { PlacesListComponent } from './components/places-list/places-list.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [DashboardLayoutComponent, MenuComponent, CategoriesListComponent, PlacesListComponent],

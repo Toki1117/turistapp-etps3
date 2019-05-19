@@ -1,4 +1,8 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { PlacesService } from 'src/app/modules/core/services/places/places.service';
+import { Places } from 'src/app/modules/core/interfaces/places.interface';
+import { Response } from 'selenium-webdriver/http';
 
 const ELEMENT_DATA = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -19,12 +23,17 @@ const ELEMENT_DATA = [
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
-
+  placesList$: Observable<Places[]>;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+  
+  constructor(private placesService: PlacesService) { }
 
   ngOnInit() {
+   /*  this.placesList$ = this.placesService.getPlaces();
+    this.placesList$.subscribe( response =>
+      console.log(response)
+    ); */
   }
 
 }
