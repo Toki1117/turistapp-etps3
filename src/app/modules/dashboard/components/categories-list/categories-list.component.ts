@@ -23,7 +23,7 @@ const ELEMENT_DATA = [
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
-  placesList$: Observable<Places[]>;
+  //placesList$: Observable<Places[]>;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
   dataSource = ELEMENT_DATA;
   

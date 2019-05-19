@@ -7,10 +7,19 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SharedModule } from '../shared/shared.module';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { PlacesListComponent } from './components/places-list/places-list.component';
-import { CoreModule } from '../core/core.module';
+import { EditAddCategoriesComponent } from './components/edit-add-categories/edit-add-categories.component';
+import { EditAddPlacesComponent } from './components/edit-add-places/edit-add-places.component';
+
 
 @NgModule({
-  declarations: [DashboardLayoutComponent, MenuComponent, CategoriesListComponent, PlacesListComponent],
+  declarations: [
+    DashboardLayoutComponent,
+    MenuComponent,
+    CategoriesListComponent,
+    PlacesListComponent,
+    EditAddPlacesComponent,
+    EditAddCategoriesComponent
+  ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
