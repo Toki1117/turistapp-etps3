@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import {MatCardModule } from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [PageNotFoundComponent],
@@ -36,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatOptionModule,
     MatLineModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ]
 })
 export class SharedModule { }
