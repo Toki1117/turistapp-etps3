@@ -22,7 +22,7 @@ const ELEMENT_DATA = [
   styleUrls: ['./places-list.component.scss']
 })
 export class PlacesListComponent implements OnInit {
-  placesList$: Observable<Places[]>;
+  placesList$: Observable<Partial<Places[]>>;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
   dataSource = ELEMENT_DATA;
 

@@ -12,7 +12,7 @@ export class PlacesService {
 
   constructor(private http: HttpClient) { }
 
-  getPlaces(): Observable<Places[]> {
-    return this.http.get<Places[]>(this.url + '/Lugares');
+  getPlaces(): Observable<Partial<Places[]>> {
+    return this.http.get<Partial<Places[]>>(this.url + '/Lugares');
   }
 }

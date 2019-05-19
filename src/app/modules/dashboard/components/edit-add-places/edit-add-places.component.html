@@ -1,3 +1,55 @@
-<p>
-  edit-add-places works!
-</p>
+<div class="form-container">
+  <form action="">
+    <mat-form-field>
+      <input required matInput placeholder="Nombre" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea required matInput placeholder="Description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input required matInput placeholder="Imagen" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea required matInput placeholder="Dirección"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input required matInput placeholder="Latitud" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input required matInput placeholder="Longitud" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Municipios</mat-label>
+      <mat-select>
+        <mat-option>HOlis</mat-option>
+        <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option> -->
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Categoria</mat-label>
+      <mat-select>
+          <mat-option>HOlis</mat-option>
+        <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option> -->
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input required matInput placeholder="Sitio web" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input required matInput placeholder="Telefono" />
+    </mat-form-field>
+  </form>
+</div>
