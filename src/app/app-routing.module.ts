@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: './modules/access/access.module#AccessModule'
   },
   {
+    path: 'dashboard',
+    loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
+  },
+  {
     path: '',
     redirectTo: 'access',
     pathMatch: 'full'

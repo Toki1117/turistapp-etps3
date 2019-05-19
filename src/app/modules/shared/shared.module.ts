@@ -9,7 +9,12 @@ import { MatOptionModule, MatLineModule } from '@angular/material/core';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import {MatCardModule } from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
+
+
 
 @NgModule({
   declarations: [PageNotFoundComponent],
@@ -27,6 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule
   ],
   exports: [
+    FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatCheckboxModule,
@@ -36,7 +42,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatOptionModule,
     MatLineModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatSelectModule,
+    MatListModule
   ]
 })
 export class SharedModule { }
