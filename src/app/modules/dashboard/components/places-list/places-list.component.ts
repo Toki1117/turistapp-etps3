@@ -1,5 +1,5 @@
 import { PlacesService } from './../../../core/services/places/places.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Places } from 'src/app/modules/core/interfaces/places.interface';
 
@@ -23,16 +23,13 @@ const ELEMENT_DATA = [
 })
 export class PlacesListComponent implements OnInit {
   placesList$: Observable<Partial<Places[]>>;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
+  displayedColumns: string[] = ['name', 'description', 'location', 'lat', 'lon', 'website', 'tel', 'actions'];
   dataSource = ELEMENT_DATA;
 
   constructor(private placesService: PlacesService ) { }
 
   ngOnInit() {
     this.placesList$ = this.placesService.getPlaces();
-    this.placesList$.subscribe( response =>
-      console.log(response)
-    );
   }
 
 }
