@@ -1,7 +1,10 @@
+import { EditAddPlacesComponent } from './../edit-add-places/edit-add-places.component';
 import { PlacesService } from './../../../core/services/places/places.service';
 import { Observable, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Places } from 'src/app/modules/core/interfaces/places.interface';
+import { Place } from 'src/app/modules/core/interfaces/places.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { EditAddCategoriesComponent } from '../edit-add-categories/edit-add-categories.component';
 
 const ELEMENT_DATA = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -22,14 +25,29 @@ const ELEMENT_DATA = [
   styleUrls: ['./places-list.component.scss']
 })
 export class PlacesListComponent implements OnInit {
-  placesList$: Observable<Partial<Places[]>>;
-  displayedColumns: string[] = ['name', 'description', 'location', 'lat', 'lon', 'website', 'tel', 'actions'];
+  placesList$: Observable<Place[]>;
+  displayedColumns: string[] = ['id', 'name', 'description', 'img_src', 'location', 'lat', 'lon', 'website', 'tel', 'actions'];
   dataSource = ELEMENT_DATA;
 
-  constructor(private placesService: PlacesService ) { }
+  constructor(
+    public dialog: MatDialog,
+    private placesService: PlacesService ) { }
 
   ngOnInit() {
     this.placesList$ = this.placesService.getPlaces();
+  }
+
+  deletePlace(placeId: number) {
+    console.log(placeId);
+  }
+
+  editPlace(place: Place) {
+    console.log(place);
+
+    const  dialogRef = this.dialog.open(EditAddPlacesComponent, {
+      data: place
+    });
+
   }
 
 }

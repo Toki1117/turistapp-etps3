@@ -24,6 +24,9 @@ import { EditAddPlacesComponent } from './components/edit-add-places/edit-add-pl
     CommonModule,
     DashboardRoutingModule,
     SharedModule
+  ],
+  entryComponents: [
+    EditAddCategoriesComponent
   ]
 })
 export class DashboardModule { }

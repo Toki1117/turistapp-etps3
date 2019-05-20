@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Place } from 'src/app/modules/core/interfaces/places.interface';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-add-categories',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-add-categories.component.scss']
 })
 export class EditAddCategoriesComponent implements OnInit {
-
-  constructor() { }
+  editForm: FormGroup;
+  
+  constructor(
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: Place ) { }
 
   ngOnInit() {
+    this.editForm = this.fb.group({
+      name: ['']
+    });
   }
 
 }

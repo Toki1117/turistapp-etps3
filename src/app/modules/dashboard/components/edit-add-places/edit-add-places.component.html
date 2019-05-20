@@ -1,32 +1,46 @@
 <div class="form-container">
-  <form action="" class="form-places">
+  <form [formGroup]="editPlaceForm" (click)="submit()" class="form-places">
     <mat-form-field>
-      <input required matInput placeholder="Nombre" />
+      <input
+      formControlName="name" 
+      required 
+      matInput
+      placeholder="Nombre" />
     </mat-form-field>
 
     <mat-form-field>
-      <textarea required matInput placeholder="Description"></textarea>
+      <textarea 
+      formControlName="description"
+      required matInput placeholder="Description"></textarea>
     </mat-form-field>
 
     <mat-form-field>
-      <input required matInput placeholder="Imagen" />
+      <input 
+      formControlName="image"
+      required matInput placeholder="Imagen" />
     </mat-form-field>
 
     <mat-form-field>
-      <textarea required matInput placeholder="Dirección"></textarea>
+      <textarea
+      formControlName="location"
+       required matInput placeholder="Dirección"></textarea>
     </mat-form-field>
 
     <mat-form-field>
-      <input required matInput placeholder="Latitud" />
+      <input
+      formControlName="lat"
+      required matInput placeholder="Latitud" />
     </mat-form-field>
 
     <mat-form-field>
-      <input required matInput placeholder="Longitud" />
+      <input 
+      formControlName="lon"
+      required matInput placeholder="Longitud" />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Municipios</mat-label>
-      <mat-select>
+      <mat-select formControlName="municipality">
         <mat-option>HOlis</mat-option>
         <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
           {{food.viewValue}}
@@ -36,7 +50,7 @@
 
     <mat-form-field>
       <mat-label>Categoria</mat-label>
-      <mat-select>
+      <mat-select formControlName="category">
           <mat-option>HOlis</mat-option>
         <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
             {{food.viewValue}}
@@ -45,11 +59,15 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input required matInput placeholder="Sitio web" />
+      <input
+      formControlName="website"
+       required matInput placeholder="Sitio web" />
     </mat-form-field>
 
     <mat-form-field>
-      <input required matInput placeholder="Telefono" />
+      <input
+      formControlName="tel"
+       required matInput placeholder="Telefono" />
     </mat-form-field>
   </form>
 </div>

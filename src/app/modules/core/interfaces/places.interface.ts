@@ -1,4 +1,4 @@
-export interface Places {
+export interface Place {
   idLugar: number;
   name: string;
   description: string;

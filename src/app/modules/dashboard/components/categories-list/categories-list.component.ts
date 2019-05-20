@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from 'src/app/modules/core/services/places/places.service';
-import { Places } from 'src/app/modules/core/interfaces/places.interface';
+import { Place } from 'src/app/modules/core/interfaces/places.interface';
 import { Response } from 'selenium-webdriver/http';
 
 const ELEMENT_DATA = [
@@ -23,7 +23,7 @@ const ELEMENT_DATA = [
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
-  //placesList$: Observable<Places[]>;
+  //placesList$: Observable<Place[]>;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
   dataSource = ELEMENT_DATA;
   
