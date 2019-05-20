@@ -15,4 +15,8 @@ export class PlacesService {
   getPlaces(): Observable<Place[]> {
     return this.http.get<Place[]>(this.url + '/Lugares');
   }
+
+  addNewPlace(data: Place): Observable<Place>  {
+    return this.http.post<Place>(this.url + '/Lugares/Save', data);
+  }
 }
