@@ -47,7 +47,12 @@ export class PlacesListComponent implements OnInit {
     const  dialogRef = this.dialog.open(EditAddPlacesComponent, {
       data: place
     });
+  }
 
+  addPlace() {
+    const  dialogRef = this.dialog.open(EditAddPlacesComponent, {
+      data: {}
+    });
   }
 
 }
