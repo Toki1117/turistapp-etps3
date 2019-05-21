@@ -124,7 +124,7 @@ export class EditAddPlacesComponent implements OnInit {
         this.snackBar.open('Lugar guardado','', {
           duration: 3000
         });
-        this.dialogRef.close();
+        this.dialogRef.close({result: 1});
       }, error => {
         this.snackBar.open('ERROR: al guardar','', {
           duration: 3000

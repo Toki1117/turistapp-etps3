@@ -46,9 +46,15 @@ export class PlacesListComponent implements OnInit {
 
   editPlace(place: Place) {
     console.log(place);
-
     const  dialogRef = this.dialog.open(EditAddPlacesComponent, {
       data: place
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(result);
+      if(result.result) {
+        
+      }
     });
   }
 
@@ -57,9 +63,4 @@ export class PlacesListComponent implements OnInit {
       data: {}
     });
   }
-
-  /* deletePlace() {
-    
-  } */
-
 }
