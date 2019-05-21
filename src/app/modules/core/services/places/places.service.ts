@@ -24,5 +24,7 @@ export class PlacesService {
     return this.http.put<Place>(this.url + '/Lugares/Save', data);
   }
 
-  //deletePlace(id: number): Observable<Place>
+  deletePlace(id: number): Observable<Place[]> {
+    return this.http.get<Place[]>(this.url + '/Lugares/Save?idLugar=' + id);
+  }
 }

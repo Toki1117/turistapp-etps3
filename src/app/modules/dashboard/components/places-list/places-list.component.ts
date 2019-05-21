@@ -8,6 +8,7 @@ import { Place } from 'src/app/modules/core/interfaces/places.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { EditAddCategoriesComponent } from '../edit-add-categories/edit-add-categories.component';
 import { Department } from 'src/app/modules/core/interfaces/department.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const ELEMENT_DATA = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -33,7 +34,9 @@ export class PlacesListComponent implements OnInit {
   dataSource = ELEMENT_DATA;
 
   constructor(
+
     public dialog: MatDialog,
+    private snackBar: MatSnackBar,
     private placesService: PlacesService ) { }
 
   ngOnInit() {
@@ -42,6 +45,16 @@ export class PlacesListComponent implements OnInit {
 
   deletePlace(placeId: number) {
     console.log(placeId);
+    this.placesService.deletePlace(placeId)
+    .subscribe( reponse => {
+      this.snackBar.open('Registro borrado exitosamente', '', {
+        duration: 3000,
+      });
+    }, error => {
+      this.snackBar.open('ERROR: no se pudo borrar el registro', '', {
+        duration: 5000,
+      });
+    });
   }
 
   editPlace(place: Place) {
