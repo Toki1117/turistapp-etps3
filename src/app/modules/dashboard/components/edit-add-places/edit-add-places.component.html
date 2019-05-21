@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form [formGroup]="editPlaceForm" (click)="submit()" class="form-places">
+  <form [formGroup]="editPlaceForm" (ngSubmit)="submit()" class="form-places">
     
     <div class="group-form">
       <mat-form-field>
@@ -18,8 +18,14 @@
     
     <mat-form-field>
       <mat-label>Categoria</mat-label>
-      <mat-select formControlName="category">
-        <mat-option>HOlis</mat-option>
+      <mat-select
+      required
+      formControlName="category">
+        <mat-option 
+        *ngFor="let cat of categList$ | async"
+        [value]="cat.idCateg || data.idCateg">
+          {{cat.nombre}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
     
@@ -45,7 +51,7 @@
       </mat-form-field>
 
       <div class="group-control">
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-label>Departamento</mat-label>
           <mat-select formControlName="deptos">
             <mat-option
@@ -55,15 +61,15 @@
               {{ dep.nombre }}
             </mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field>
           <mat-label>Municipio</mat-label>
           <mat-select formControlName="municipality">
             <mat-option
+              required
               *ngFor="let muni of municipalitiesList$ | async"
-              [value]="muni.idMunicipio"
-            >
+              [value]="muni.idMunicipio || data.idMunicipio">
               {{ muni.nombre }}
             </mat-option>
           </mat-select>
@@ -115,8 +121,7 @@
         color="accent"
         mat-raised-button
         [disabled]="editPlaceForm.invalid || editPlaceForm.pending"
-        type="submit"
-      >
+        type="submit">
         Submit
       </button>
     </div>

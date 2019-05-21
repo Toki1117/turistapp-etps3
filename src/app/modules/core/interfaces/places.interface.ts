@@ -1,5 +1,5 @@
 export interface Place {
-  idLugar: number;
+  id?: number;
   name: string;
   description: string;
   img_src: string;
@@ -10,4 +10,5 @@ export interface Place {
   tel: string;
   idMunicipio: number;
   idCateg: number;
+  idDepart?: number;
 }

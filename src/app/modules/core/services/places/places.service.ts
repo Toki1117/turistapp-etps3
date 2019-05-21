@@ -19,4 +19,10 @@ export class PlacesService {
   addNewPlace(data: Place): Observable<Place>  {
     return this.http.post<Place>(this.url + '/Lugares/Save', data);
   }
+
+  editPlace( data: Place): Observable<Place> {
+    return this.http.put<Place>(this.url + '/Lugares/Save', data);
+  }
+
+  //deletePlace(id: number): Observable<Place>
 }

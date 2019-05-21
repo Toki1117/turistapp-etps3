@@ -58,4 +58,8 @@ export class PlacesListComponent implements OnInit {
     });
   }
 
+  /* deletePlace() {
+    
+  } */
+
 }
