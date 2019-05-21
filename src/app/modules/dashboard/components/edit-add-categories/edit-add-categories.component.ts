@@ -13,6 +13,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class EditAddCategoriesComponent implements OnInit {
   editCatForm: FormGroup;
+  title: string;
   
   constructor(
     private fb: FormBuilder,
@@ -25,6 +26,13 @@ export class EditAddCategoriesComponent implements OnInit {
     this.editCatForm = this.fb.group({
       name: ['', [Validators.required]]
     });
+
+    console.log(this.data.idCateg);
+    if (this.data.idCateg !== undefined) {
+      this.title = `Editar categoría ${this.data.nombre}`;
+    } else {
+      this.title = 'Agregar nueva categoría';
+    }
   }
 
   get name() {
@@ -34,7 +42,10 @@ export class EditAddCategoriesComponent implements OnInit {
   submit() {
     this.editCatForm.markAsPending();
     if (this.data.idCateg !== undefined) {
-      console.log("add");
+      console.log("edit", this.data.idCateg);
+      //ADD CODE heer
+    } else {
+      console.log("add", this.data.idCateg);
       this.catService.addCategories(this.name.value)
       .pipe( finalize( () => this.editCatForm.setErrors(null)) )
       .subscribe( response => {
@@ -48,9 +59,6 @@ export class EditAddCategoriesComponent implements OnInit {
         });
         this.dialogRef.close({result: 0});
       });
-
-    } else {
-      console.log("edit");
     }
   }
 
