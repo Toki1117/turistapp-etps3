@@ -1,7 +1,9 @@
 <h1>Listado de Categorias</h1>
-<div class="categories-list" *ngIf="categoriesList$ | async as cat; else loading">
-  <ng-container *ngIf="cat.length > 0; else noData">
-    <table mat-table [dataSource]="cat" class="mat-elevation-z8">
+<!-- <div class="categories-list" *ngIf="categoriesList$ | async as cat; else loading">
+  <ng-container *ngIf="cat.length > 0; else noData"> -->
+<div class="categories-list" *ngIf="dataSource.data; else loading">
+  <ng-container *ngIf="dataSource.data.length > 0; else noData">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
       <ng-container matColumnDef="idCateg">
         <th mat-header-cell *matHeaderCellDef>ID</th>

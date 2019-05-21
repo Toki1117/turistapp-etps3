@@ -5,6 +5,7 @@ import { CategoriesService } from 'src/app/modules/core/services/categories/cate
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditAddCategoriesComponent } from '../edit-add-categories/edit-add-categories.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 const ELEMENT_DATA = [
   {idCateg: 1, nombre: 'Hydrogen'},
@@ -22,7 +23,7 @@ const ELEMENT_DATA = [
 export class CategoriesListComponent implements OnInit {
   categoriesList$: Observable<Category[]>;
   displayedColumns: string[] = ['idCateg', 'nombre', 'actions'];
-  dataSource = ELEMENT_DATA;
+  dataSource: MatTableDataSource<Category>;
   
   constructor(
     private snackBar: MatSnackBar,
@@ -32,9 +33,9 @@ export class CategoriesListComponent implements OnInit {
   ngOnInit() {
     this.categoriesList$ = of(ELEMENT_DATA);
     /* this.categoriesList$ = this.categoriesService.getCategories(); */
-    /* this.categoriesList$.subscribe( response =>
-      console.log(response)
-    ); */
+    this.categoriesList$.subscribe( response =>
+      this.dataSource = new MatTableDataSource(response)
+    );
   }
 
   addCategory() {
