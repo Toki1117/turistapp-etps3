@@ -18,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./edit-add-places.component.scss']
 })
 export class EditAddPlacesComponent implements OnInit {
+  title: string;
   categList$: Observable<Category[]>;
   municipalitiesList$: Observable<Municipality[]>;
   departmentsList$: Observable<Department[]>;
@@ -50,6 +51,12 @@ export class EditAddPlacesComponent implements OnInit {
       website: [this.data.website || '', [Validators.required]],
       tel: [this.data.tel || '', [Validators.required]]
     });
+
+    if (this.data.id !== undefined) {
+      this.title = `Editar ${this.data.name}`;
+    } else {
+      this.title = 'Agregar nuevo lugar';
+    }
   }
 
   get name() {

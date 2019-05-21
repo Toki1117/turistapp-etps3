@@ -21,12 +21,12 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['dashboard/lugares-turisticos']);
   }
 
-  goToAddCat() {
+  /* goToAddCat() {
     this.router.navigate(['dashboard/categorias/agregar']);
   }
 
   goToAddPlace() {
     this.router.navigate(['dashboard/lugares-turisticos/agregar']);
-  }
+  } */
 
 }

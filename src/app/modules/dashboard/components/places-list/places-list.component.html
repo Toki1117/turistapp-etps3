@@ -1,7 +1,9 @@
 <h1>Listado de Lugares turísticos</h1>
-<div class="places-list" *ngIf="placesList$ | async as places; else loading">
-  <ng-container *ngIf="places.length > 0; else noData">
-    <table mat-table [dataSource]="places" class="mat-elevation-z8">
+<!-- <div class="places-list" *ngIf="placesList$ | async as places; else loading">
+  <ng-container *ngIf="places.length > 0; else noData"> -->
+      <div class="places-list" *ngIf="dataSource.data; else loading">
+          <ng-container *ngIf="dataSource.data.length > 0; else noData">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
