@@ -1,7 +1,11 @@
+import { Place } from './../../../core/interfaces/places.interface';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Place } from 'src/app/modules/core/interfaces/places.interface';
+import { Observable } from 'rxjs';
+import { Municipality } from 'src/app/modules/core/interfaces/municipality.interface';
+import { Department } from 'src/app/modules/core/interfaces/department.interface';
+import { LocationPlaceService } from 'src/app/modules/core/services/location/location-place.service';
 
 @Component({
   selector: 'app-edit-add-places',
@@ -9,12 +13,19 @@ import { Place } from 'src/app/modules/core/interfaces/places.interface';
   styleUrls: ['./edit-add-places.component.scss']
 })
 export class EditAddPlacesComponent implements OnInit {
+  municipalitiesList$: Observable<Municipality[]>;
+  departmentsList$: Observable<Department[]>;
   editPlaceForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: Place ) { }
+  constructor(
+    private fb: FormBuilder,
+    private localitationService: LocationPlaceService,
+    @Inject(MAT_DIALOG_DATA) public data: Place ) { }
 
   ngOnInit() {
+    this.municipalitiesList$ = this.localitationService.getMunicipalities();
+    this.departmentsList$ = this.localitationService.getDepartments();
+
     this.editPlaceForm = this.fb.group({
       name: [this.data.name || '', [Validators.required]],
       description: [this.data.description || '', [Validators.required]],
@@ -22,13 +33,12 @@ export class EditAddPlacesComponent implements OnInit {
       location: [this.data.location || '', [Validators.required]],
       lat: [this.data.lat || '', [Validators.required]],
       lon: [this.data.lon || '', [Validators.required]],
+      deptos: ['', [Validators.required]],
       municipality: ['', [Validators.required]],
       category: ['', [Validators.required]],
       website: [this.data.website || '', [Validators.required]],
       tel: [this.data.tel || '', [Validators.required]]
     });
-
-    console.log(this.data);
   }
 
   get name() {
@@ -59,6 +69,10 @@ export class EditAddPlacesComponent implements OnInit {
     return this.editPlaceForm.get('municipality');
   }
 
+  get deptos() {
+    return this.editPlaceForm.get('deptos');
+  }
+
   get category() {
     return this.editPlaceForm.get('category');
   }
@@ -72,8 +86,10 @@ export class EditAddPlacesComponent implements OnInit {
   }
 
   submit() {
-
+    if (this.data.idLugar) {
+      console.log('edit');
+    } else {
+      console.log('add');
+    }
   }
-
-
 }

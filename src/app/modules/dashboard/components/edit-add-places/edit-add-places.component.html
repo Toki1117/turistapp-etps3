@@ -1,73 +1,124 @@
 <div class="form-container">
   <form [formGroup]="editPlaceForm" (click)="submit()" class="form-places">
+    
+    <div class="group-form">
+      <mat-form-field>
+        <input formControlName="name" required matInput placeholder="Nombre" />
+    </mat-form-field>
+    
     <mat-form-field>
+      <mat-label>Imagen</mat-label>
       <input
-      formControlName="name" 
-      required 
-      matInput
-      placeholder="Nombre" />
-    </mat-form-field>
-
-    <mat-form-field>
-      <textarea 
-      formControlName="description"
-      required matInput placeholder="Description"></textarea>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input 
       formControlName="image"
-      required matInput placeholder="Imagen" />
+      required
+      matInput
+      placeholder="Url de imagen"
+      />
     </mat-form-field>
-
-    <mat-form-field>
-      <textarea
-      formControlName="location"
-       required matInput placeholder="Dirección"></textarea>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input
-      formControlName="lat"
-      required matInput placeholder="Latitud" />
-    </mat-form-field>
-
-    <mat-form-field>
-      <input 
-      formControlName="lon"
-      required matInput placeholder="Longitud" />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Municipios</mat-label>
-      <mat-select formControlName="municipality">
-        <mat-option>HOlis</mat-option>
-        <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}}
-        </mat-option> -->
-      </mat-select>
-    </mat-form-field>
-
+    
     <mat-form-field>
       <mat-label>Categoria</mat-label>
       <mat-select formControlName="category">
-          <mat-option>HOlis</mat-option>
-        <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
-          </mat-option> -->
+        <mat-option>HOlis</mat-option>
       </mat-select>
     </mat-form-field>
-
+    
     <mat-form-field>
-      <input
-      formControlName="website"
-       required matInput placeholder="Sitio web" />
+      <textarea
+      formControlName="description"
+      required
+      matInput
+      placeholder="Description"
+      ></textarea>
     </mat-form-field>
+  </div>
+    
+    <div class="group-form" id="ubicacion">
+      <label for="ubicacion"><b>Ubicación</b></label>
+      <mat-form-field>
+        <textarea
+          formControlName="location"
+          required
+          matInput
+          placeholder="Dirección"
+        ></textarea>
+      </mat-form-field>
 
-    <mat-form-field>
-      <input
-      formControlName="tel"
-       required matInput placeholder="Telefono" />
-    </mat-form-field>
+      <div class="group-control">
+        <mat-form-field>
+          <mat-label>Departamento</mat-label>
+          <mat-select formControlName="deptos">
+            <mat-option
+              *ngFor="let dep of departmentsList$ | async"
+              [value]="dep.idDepart"
+            >
+              {{ dep.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Municipio</mat-label>
+          <mat-select formControlName="municipality">
+            <mat-option
+              *ngFor="let muni of municipalitiesList$ | async"
+              [value]="muni.idMunicipio"
+            >
+              {{ muni.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="group-form">
+      <label for="location"><b>Coordenadas terrestres</b></label>
+      <div id="location" class="group-control">
+        <mat-form-field>
+          <input
+            formControlName="lat"
+            required
+            matInput
+            placeholder="Latitud"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            formControlName="lon"
+            required
+            matInput
+            placeholder="Longitud"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="group-form" id="contacto">
+      <label for="contacto"><b>Contacto</b></label>
+      <mat-form-field>
+        <input
+          formControlName="website"
+          required
+          matInput
+          placeholder="Sitio web"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input formControlName="tel" required matInput placeholder="Telefono" />
+      </mat-form-field>
+    </div>
+
+    <div class="submit">
+      <button
+        color="accent"
+        mat-raised-button
+        [disabled]="editPlaceForm.invalid || editPlaceForm.pending"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
   </form>
 </div>

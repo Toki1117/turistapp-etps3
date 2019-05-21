@@ -1,3 +1,5 @@
+import { Municipality } from './../../../core/interfaces/municipality.interface';
+import { LocationPlaceService } from './../../../core/services/location/location-place.service';
 import { EditAddPlacesComponent } from './../edit-add-places/edit-add-places.component';
 import { PlacesService } from './../../../core/services/places/places.service';
 import { Observable, of } from 'rxjs';
@@ -5,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { Place } from 'src/app/modules/core/interfaces/places.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { EditAddCategoriesComponent } from '../edit-add-categories/edit-add-categories.component';
+import { Department } from 'src/app/modules/core/interfaces/department.interface';
 
 const ELEMENT_DATA = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
