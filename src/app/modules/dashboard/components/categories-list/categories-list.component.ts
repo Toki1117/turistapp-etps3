@@ -1,13 +1,24 @@
 import { Observable, of } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Category } from 'src/app/modules/core/interfaces/category.interface';
 import { CategoriesService } from 'src/app/modules/core/services/categories/categories.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditAddCategoriesComponent } from '../edit-add-categories/edit-add-categories.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 const ELEMENT_DATA = [
+  {idCateg: 1, nombre: 'Hydrogen'},
+  {idCateg: 1, nombre: 'Hydrogen'},
+  {idCateg: 1, nombre: 'Hydrogen'},
+  {idCateg: 1, nombre: 'Hydrogen'},
+  {idCateg: 1, nombre: 'Hydrogen'},
+  {idCateg: 1, nombre: 'Hydrogen'},
+  {idCateg: 1, nombre: 'Hydrogen'},
+  {idCateg: 1, nombre: 'Hydrogen'},
+  {idCateg: 1, nombre: 'Hydrogen'},
+  {idCateg: 1, nombre: 'Hydrogen'},
   {idCateg: 1, nombre: 'Hydrogen'},
   {idCateg: 1, nombre: 'Hydrogen'},
   {idCateg: 1, nombre: 'Hydrogen'},
@@ -20,10 +31,12 @@ const ELEMENT_DATA = [
   templateUrl: './categories-list.component.html',
   styleUrls: ['./categories-list.component.scss']
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent implements OnInit, AfterViewInit {
   categoriesList$: Observable<Category[]>;
   displayedColumns: string[] = ['idCateg', 'nombre', 'actions'];
-  dataSource: MatTableDataSource<Category>;
+  dataSource: MatTableDataSource<Category> = new MatTableDataSource();
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   
   constructor(
     private snackBar: MatSnackBar,
@@ -33,9 +46,13 @@ export class CategoriesListComponent implements OnInit {
   ngOnInit() {
     this.categoriesList$ = of(ELEMENT_DATA);
     /* this.categoriesList$ = this.categoriesService.getCategories(); */
-    this.categoriesList$.subscribe( response =>
-      this.dataSource = new MatTableDataSource(response)
-    );
+    this.categoriesList$.subscribe( response => {
+      this.dataSource.data = response;
+    });
+  }
+  
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   addCategory() {
