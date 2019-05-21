@@ -26,6 +26,7 @@ import { EditAddPlacesComponent } from './components/edit-add-places/edit-add-pl
     SharedModule
   ],
   entryComponents: [
+    EditAddPlacesComponent,
     EditAddCategoriesComponent
   ]
 })

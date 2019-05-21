@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { PlacesService } from 'src/app/modules/core/services/places/places.service';
 import { Place } from 'src/app/modules/core/interfaces/places.interface';
 import { Response } from 'selenium-webdriver/http';
+import { Category } from 'src/app/modules/core/interfaces/category.interface';
+import { CategoriesService } from 'src/app/modules/core/services/categories/categories.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { EditAddCategoriesComponent } from '../edit-add-categories/edit-add-categories.component';
 
 const ELEMENT_DATA = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -23,17 +28,51 @@ const ELEMENT_DATA = [
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
-  //placesList$: Observable<Place[]>;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
+  categoriesList$: Observable<Category[]>;
+  displayedColumns: string[] = ['idCateg', 'nombre', 'actions'];
   dataSource = ELEMENT_DATA;
   
-  constructor(private placesService: PlacesService) { }
+  constructor(
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private categoriesService: CategoriesService) { }
 
   ngOnInit() {
-   /*  this.placesList$ = this.placesService.getPlaces();
-    this.placesList$.subscribe( response =>
+    this.categoriesList$ = this.categoriesService.getCategories();
+    this.categoriesList$.subscribe( response =>
       console.log(response)
-    ); */
+    );
   }
 
+  addCategory() {
+    console.log('add');
+    const  dialogRef = this.dialog.open(EditAddCategoriesComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(result);
+      if(result.result) {
+        
+      }
+    });
+  }
+
+  deleteCategory(id: number) {
+    console.log(id);
+    this.categoriesService.deleteCategories(id)
+    .subscribe( response =>  {
+      this.snackBar.open('Categoria borrada con exito', '', {
+        duration: 2000,
+      });
+    }, error => {
+      this.snackBar.open('ERROR: no se pudo borrar registro', '', {
+        duration: 5000,
+      });
+    });
+  }
+
+  /* editCategory(cat: Category) {
+    console.log(cat);
+  } */
 }

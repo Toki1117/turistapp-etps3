@@ -1,3 +1,19 @@
-<p>
-  edit-add-categories works!
-</p>
+<div class="form-container">
+  <form [formGroup]="editCatForm" (ngSubmit)="submit()" class="form-categ">
+    <div class="group-form">
+      <mat-form-field>
+        <input formControlName="name" required matInput placeholder="Nombre" />
+      </mat-form-field>
+    </div>
+
+    <div class="submit">
+      <button
+        color="accent"
+        mat-raised-button
+        [disabled]="editCatForm.invalid || editCatForm.pending"
+        type="submit">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
