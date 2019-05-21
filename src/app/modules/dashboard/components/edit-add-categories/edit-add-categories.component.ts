@@ -1,7 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Place } from 'src/app/modules/core/interfaces/places.interface';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Category } from 'src/app/modules/core/interfaces/category.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CategoriesService } from 'src/app/modules/core/services/categories/categories.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-add-categories',
@@ -9,16 +12,46 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./edit-add-categories.component.scss']
 })
 export class EditAddCategoriesComponent implements OnInit {
-  editForm: FormGroup;
+  editCatForm: FormGroup;
   
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: Place ) { }
+    private catService: CategoriesService,
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<EditAddCategoriesComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Category ) { }
 
   ngOnInit() {
-    this.editForm = this.fb.group({
-      name: ['']
+    this.editCatForm = this.fb.group({
+      name: ['', [Validators.required]]
     });
+  }
+
+  get name() {
+    return this.editCatForm.get('name');
+  }
+
+  submit() {
+    this.editCatForm.markAsPending();
+    if (this.data.idCateg !== undefined) {
+      console.log("add");
+      this.catService.addCategories(this.name.value)
+      .pipe( finalize( () => this.editCatForm.setErrors(null)) )
+      .subscribe( response => {
+        this.snackBar.open('Categoria guardada exitosamente', '', {
+          duration: 2000
+        });
+        this.dialogRef.close({result: 1});
+      }, error => {
+        this.snackBar.open('ERROR: el registro no pudo guardarse', '', {
+          duration: 5000
+        });
+        this.dialogRef.close({result: 0});
+      });
+
+    } else {
+      console.log("edit");
+    }
   }
 
 }

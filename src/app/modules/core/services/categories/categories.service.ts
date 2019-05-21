@@ -15,4 +15,12 @@ export class CategoriesService {
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + '/Categorias');
   }
+
+  addCategories(catName: string): Observable<Category> {
+    return this.http.post<Category>(this.url + '/Categorias/Save', {name: catName});
+  }
+
+  deleteCategories(id: number): Observable<Category> {
+    return this.http.get<Category>(this.url + '/Categorias/Save?idCateg=' + id);
+  }
 }

@@ -1,0 +1,21 @@
+.form-container {
+  text-align: center;
+}
+
+.form-categ {
+  display: flex;
+  flex-flow: column;
+  //align-items: center;
+  padding: 20px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.submit button {
+  width: 70%;
+  margin-top: 10px;
+}
