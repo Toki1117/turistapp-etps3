@@ -21,6 +21,6 @@ export class CategoriesService {
   }
 
   deleteCategories(id: number): Observable<Category> {
-    return this.http.get<Category>(this.url + '/Categorias/Save?idCateg=' + id);
+    return this.http.post<Category>(this.url + '/Categorias//Del?idCat=' + id, {});
   }
 }

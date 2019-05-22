@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Category } from 'src/app/modules/core/interfaces/category.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoriesService } from 'src/app/modules/core/services/categories/categories.service';
 import { finalize } from 'rxjs/operators';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-edit-add-categories',
