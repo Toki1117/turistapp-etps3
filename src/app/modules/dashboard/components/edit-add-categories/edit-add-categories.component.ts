@@ -5,7 +5,6 @@ import { Category } from 'src/app/modules/core/interfaces/category.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoriesService } from 'src/app/modules/core/services/categories/categories.service';
 import { finalize } from 'rxjs/operators';
-import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-edit-add-categories',
@@ -28,7 +27,6 @@ export class EditAddCategoriesComponent implements OnInit {
       name: [this.data.nombre || '', [Validators.required]]
     });
 
-    console.log(this.data.idCateg);
     if (this.data.idCateg !== undefined) {
       this.title = `Editar categoría ${this.data.nombre}`;
     } else {

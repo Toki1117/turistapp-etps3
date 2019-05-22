@@ -81,7 +81,6 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
     .pipe( finalize( () => this.getData() ) )
     .subscribe( result => {
       if (result !== undefined) {
-        console.log(result);
         if (result === 1) {
           this.paginator.firstPage();
         }
@@ -91,11 +90,11 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
 
   deleteCategory(id: number) {
     this.categoriesService.deleteCategories(id)
+    .pipe( finalize( () => this.getData() ) )
     .subscribe( response =>  {
       this.snackBar.open('Categoria borrada con exito', '', {
         duration: 2000,
       });
-      this.getData();
     }, error => {
       this.snackBar.open('ERROR: no se pudo borrar registro', '', {
         duration: 5000,
@@ -108,10 +107,12 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
       data: cat
     });
 
-    dialogRef.afterClosed().subscribe( result => {
+    dialogRef.afterClosed()
+    .pipe( finalize( () => this.getData() ) )
+    .subscribe( result => {
       if (result !== undefined) {
         if (result === 1) {
-          this.getData();
+          // CODE
         }
       }
     });
