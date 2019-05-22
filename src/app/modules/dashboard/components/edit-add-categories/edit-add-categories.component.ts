@@ -24,7 +24,7 @@ export class EditAddCategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.editCatForm = this.fb.group({
-      name: ['', [Validators.required]]
+      name: [this.data.nombre || '', [Validators.required]]
     });
 
     console.log(this.data.idCateg);
@@ -45,7 +45,6 @@ export class EditAddCategoriesComponent implements OnInit {
       console.log("edit", this.data.idCateg);
       //ADD CODE heer
     } else {
-      console.log("add", this.data.idCateg);
       this.catService.addCategories(this.name.value)
       .pipe( finalize( () => this.editCatForm.setErrors(null)) )
       .subscribe( response => {

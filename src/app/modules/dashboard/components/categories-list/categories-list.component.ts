@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditAddCategoriesComponent } from '../edit-add-categories/edit-add-categories.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { tap } from 'rxjs/operators';
 
 const ELEMENT_DATA = [
   {idCateg: 1, nombre: 'Hydrogen'},
@@ -32,6 +33,7 @@ const ELEMENT_DATA = [
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit, AfterViewInit {
+  isLoading: boolean;
   categoriesList$: Observable<Category[]>;
   displayedColumns: string[] = ['idCateg', 'nombre', 'actions'];
   dataSource: MatTableDataSource<Category> = new MatTableDataSource();
@@ -44,15 +46,27 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
     private categoriesService: CategoriesService) { }
 
   ngOnInit() {
-    this.categoriesList$ = of(ELEMENT_DATA);
-    /* this.categoriesList$ = this.categoriesService.getCategories(); */
-    this.categoriesList$.subscribe( response => {
-      this.dataSource.data = response;
-    });
+    this.getData();
   }
   
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  getData() {
+    // Mocking Data
+    /* this.categoriesList$ = of(ELEMENT_DATA);
+    this.categoriesList$.subscribe( response => {
+      this.dataSource.data = response;
+    }); */
+
+    // Real Data
+    this.categoriesService.getCategories()
+    .pipe( tap( x => this.isLoading = true ))
+    .subscribe( response => {
+      this.isLoading = false;
+      this.dataSource.data = response;
+    });
   }
 
   addCategory() {
@@ -62,8 +76,9 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe( result => {
       if (result !== undefined) {
-        console.log(result);
-        //ADD CODE HERE
+        if (result === 1) {
+          this.getData();
+        }
       }
     });
   }
@@ -88,8 +103,10 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe( result => {
       if (result !== undefined) {
-        console.log(result);
-        //ADD CORE HERE
+        if (result === 1) {
+          //ADD CORE HERE
+
+        }
       }
     });
   }
