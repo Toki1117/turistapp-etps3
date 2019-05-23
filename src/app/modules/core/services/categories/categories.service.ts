@@ -20,6 +20,10 @@ export class CategoriesService {
     return this.http.post<Category>(this.url + '/Categorias/Save', {name: catName});
   }
 
+  editCategories(data: Category): Observable<Category> {
+    return this.http.post<Category>(`${this.url}/categorias/mod?idCateg=${data.idCateg}&name=${data.nombre}`, {});
+  }
+
   deleteCategories(id: number): Observable<Category> {
     return this.http.post<Category>(this.url + '/Categorias//Del?idCat=' + id, {});
   }

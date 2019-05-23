@@ -71,7 +71,7 @@ export class PlacesListComponent implements OnInit {
 
   deletePlace(placeId: number) {
     this.placesService.deletePlace(placeId)
-    .pipe( 
+    .pipe(
       tap( () =>  this.isLoading = true),
       finalize( () => this.getData() ) )
     .subscribe( reponse => {
@@ -94,7 +94,6 @@ export class PlacesListComponent implements OnInit {
     });
 
     dialogRef.afterClosed()
-    .pipe( finalize( () => this.getData() ) )
     .subscribe( result => {
       if (result !== undefined) {
         if (result === 1) {
@@ -110,11 +109,11 @@ export class PlacesListComponent implements OnInit {
     });
 
     dialogRef.afterClosed()
-    .pipe( finalize( () => this.getData() ) )
     .subscribe( result => {
       if (result !== undefined) {
         if (result === 1) {
           this.paginator.firstPage();
+          this.getData();
         }
       }
     });
