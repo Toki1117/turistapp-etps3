@@ -99,6 +99,7 @@ export class PlacesListComponent implements OnInit {
     });
 
     dialogRef.afterClosed()
+    .pipe( finalize( () => this.getData()) )
     .subscribe( result => {
       if (result !== undefined) {
         if (result === 1) {

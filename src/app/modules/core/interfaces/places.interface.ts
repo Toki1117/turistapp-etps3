@@ -1,5 +1,6 @@
 export interface Place {
   id?: number;
+  idLugar?: number;
   name: string;
   description: string;
   img_src: string;

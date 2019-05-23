@@ -119,7 +119,7 @@ export class EditAddPlacesComponent implements OnInit {
       tel: this.tel.value.trim()
     };
 
-    if (this.data.id !== undefined) {
+    if (this.data.idLugar !== undefined) {
 
       //MOCK DATA
      /*  this.snackBar.open('Lugar ACTUALIZADO','', {

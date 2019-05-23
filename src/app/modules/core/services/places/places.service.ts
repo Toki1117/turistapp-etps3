@@ -23,7 +23,7 @@ export class PlacesService {
   editPlace( data: Place): Observable<Place> {
     return this.http
     .post<Place>(
-      `${this.url}/lugares/mod?idLugar=${data.id}&name=${data.name}&description=${data.description}&img_src=${data.img_src}&location=${location}&lat=${data.lat}&lon=${data.lon}&idMunicipio=${data.idMunicipio}&website=${data.website}&tel=${data.tel}&idCateg=${data.idCateg}`,
+      `${this.url}/lugares/mod?idLugar=${data.idLugar}&name=${data.name}&description=${data.description}&img_src=${data.img_src}&location=${location}&lat=${data.lat}&lon=${data.lon}&idMunicipio=${data.idMunicipio}&website=${data.website}&tel=${data.tel}&idCateg=${data.idCateg}`,
        {}
     );
   }
