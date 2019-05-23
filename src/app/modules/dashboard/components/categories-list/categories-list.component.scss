@@ -1,0 +1,15 @@
+.container {
+  height: 99vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-card {
+  width: fit-content;
+}
+
+.categories-list table {
+  width: 100%;
+}

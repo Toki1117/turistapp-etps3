@@ -1,3 +1,15 @@
-.places-list {
-  
+.places-list table {
+  width: 100%;
+
+  label, p {
+    word-break: break-all;
+  }
+}
+
+.container {
+  height: 99vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,3 +1,15 @@
+.mat-card {
+  width: fit-content;
+}
+
 .container {
-  cursor: pointer;
+  text-align: center;
+}
+
+.menu-container {
+  height: 99vh;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  align-items: center;
 }

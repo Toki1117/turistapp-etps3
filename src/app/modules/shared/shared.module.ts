@@ -16,6 +16,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule, MatMenu} from '@angular/material/menu';
 
 @NgModule({
   declarations: [PageNotFoundComponent],
@@ -49,7 +51,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatListModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatToolbarModule,
+    MatMenuModule
   ]
 })
 export class SharedModule { }

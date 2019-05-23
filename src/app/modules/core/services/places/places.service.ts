@@ -21,7 +21,11 @@ export class PlacesService {
   }
 
   editPlace( data: Place): Observable<Place> {
-    return this.http.put<Place>(this.url + '/Lugares/Save', data);
+    return this.http
+    .post<Place>(
+      `${this.url}/lugares/mod?idLugar=${data.id}&name=${data.name}&description=${data.description}&img_src=${data.img_src}&location=${location}&lat=${data.lat}&lon=${data.lon}&idMunicipio=${data.idMunicipio}&website=${data.website}&tel=${data.tel}&idCateg=${data.idCateg}`,
+       {}
+    );
   }
 
   deletePlace(id: number): Observable<Place[]> {

@@ -9,8 +9,8 @@ import { LocationPlaceService } from 'src/app/modules/core/services/location/loc
 import { PlacesService } from 'src/app/modules/core/services/places/places.service';
 import { CategoriesService } from 'src/app/modules/core/services/categories/categories.service';
 import { Category } from 'src/app/modules/core/interfaces/category.interface';
-import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-add-places',
@@ -105,30 +105,56 @@ export class EditAddPlacesComponent implements OnInit {
 
   submit() {
     this.editPlaceForm.markAsPending();
+
     const place: Place = {
-      name: this.name.value,
-      img_src: this.image.value,
+      name: this.name.value.trim(),
+      img_src: this.image.value.trim(),
       idCateg: this.category.value,
-      description: this.description.value,
-      location: this.location.value,
+      description: this.description.value.trim(),
+      location: this.location.value.trim(),
       idMunicipio: this.municipality.value,
-      lat: this.lat.value,
-      lon: this.lon.value,
-      website: this.website.value,
-      tel: this.tel.value
+      lat: this.lat.value.trim(),
+      lon: this.lon.value.trim(),
+      website: this.website.value.trim(),
+      tel: this.tel.value.trim()
     };
 
     if (this.data.id !== undefined) {
-      console.log('edit', place, this.data.id);
+
+      //MOCK DATA
+     /*  this.snackBar.open('Lugar ACTUALIZADO','', {
+        duration: 3000
+      }); */
+
+      this.placesService.editPlace(place)
+      .pipe(
+        finalize( () =>
+          this.editPlaceForm.setErrors(null)
+          )
+      ).subscribe( (response: Place) => {
+        this.snackBar.open('Lugar ACTUALIZADO','', {
+          duration: 3000
+        });
+        this.dialogRef.close({result: 1});
+      }, error => {
+        this.snackBar.open('ERROR: el lugar no pudo actualizarse','', {
+          duration: 3000
+        });
+      });
     } else {
-      console.log('add', place.id, place, this.data.id);
+
+      //MOCK DATA
+      /* this.snackBar.open('Lugar GUARDADO','', {
+        duration: 3000
+      }); */
+
       this.placesService.addNewPlace(place)
       .pipe(
         finalize( () =>
           this.editPlaceForm.setErrors(null)
           )
       ).subscribe( (response: Place) => {
-        this.snackBar.open('Lugar guardado','', {
+        this.snackBar.open('Lugar GUARDADO','', {
           duration: 3000
         });
         this.dialogRef.close({result: 1});

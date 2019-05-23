@@ -5,6 +5,7 @@
   width: 100%;
   flex-flow: column;
   align-items: center;
+  padding: 50px;
   @include sm {
     width: fit-content;
   } 
@@ -16,6 +17,7 @@
 }
 
 .login {
+  background: #3E51B5;
   display: flex;
   flex-flow: column;
   height: 100vh;

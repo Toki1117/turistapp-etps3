@@ -1,0 +1,30 @@
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.user-info {
+  color: white;
+  background: #3E51B5;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 20px;
+  position: absolute;
+  z-index: 100;
+  top: 65px;
+  right: 40px;
+  border-radius: 10px;
+}
+
+.not-show {
+  display: none;
+}
+
+.material-icons {
+  padding: 20px;
+  cursor: pointer;
+}
