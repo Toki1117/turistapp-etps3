@@ -1,11 +1,11 @@
-.places-list {
-  
-}
-
-.mat-card table {
+.places-list table {
   width: 100%;
 }
 
 .container {
-  text-align: center;
+  height: 99vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
