@@ -106,20 +106,21 @@ export class EditAddPlacesComponent implements OnInit {
   submit() {
     this.editPlaceForm.markAsPending();
     const place: Place = {
-      name: this.name.value,
-      img_src: this.image.value,
+      name: this.name.value.trim(),
+      img_src: this.image.value.trim(),
       idCateg: this.category.value,
-      description: this.description.value,
-      location: this.location.value,
+      description: this.description.value.trim(),
+      location: this.location.value.trim(),
       idMunicipio: this.municipality.value,
-      lat: this.lat.value,
-      lon: this.lon.value,
-      website: this.website.value,
-      tel: this.tel.value
+      lat: this.lat.value.trim(),
+      lon: this.lon.value.trim(),
+      website: this.website.value.trim(),
+      tel: this.tel.value.trim()
     };
 
     if (this.data.id !== undefined) {
       console.log('edit', place, this.data.id);
+      //CODE 
     } else {
       console.log('add', place.id, place, this.data.id);
       this.placesService.addNewPlace(place)

@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { finalize } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 
 const ELEMENT_DATA: Place[] = [
   {id: 1, name: 'Hydrogen', description: '1.0079', img_src: 'Hsakkkkkkkkkkkkkkkkkk',location: 'sadasdsad', lat: '1212', lon: '1235', website: 'sdsad', tel: '7887878', idMunicipio: 1, idCateg: 1 },
@@ -52,6 +52,7 @@ export class PlacesListComponent implements OnInit {
   }
 
   getData() {
+    this.isLoading = true;
     // MOCKING DATA
    /*  this.placesList$ = of(ELEMENT_DATA);
     this.placesList$.subscribe( response => {
@@ -60,7 +61,7 @@ export class PlacesListComponent implements OnInit {
     }); */
 
     this.placesService.getPlaces()
-    .subscribe( response => {
+      .subscribe( response => {
       this.isLoading = false;
       this.dataSource.data = response;
       this.detectChanges.detectChanges();
@@ -69,13 +70,16 @@ export class PlacesListComponent implements OnInit {
   }
 
   deletePlace(placeId: number) {
-    console.log(placeId);
     this.placesService.deletePlace(placeId)
-    .pipe( finalize( () => this.getData() ) )
+    .pipe( 
+      tap( () =>  this.isLoading = true),
+      finalize( () => this.getData() ) )
     .subscribe( reponse => {
+      this.isLoading = false;
       this.snackBar.open('Registro borrado exitosamente', '', {
         duration: 3000,
       });
+      this.paginator.firstPage();
     }, error => {
       this.snackBar.open('ERROR: no se pudo borrar el registro', '', {
         duration: 5000,
@@ -93,7 +97,9 @@ export class PlacesListComponent implements OnInit {
     .pipe( finalize( () => this.getData() ) )
     .subscribe( result => {
       if (result !== undefined) {
-        this.paginator.firstPage();
+        if (result === 1) {
+          this.paginator.firstPage();
+        }
       }
     });
   }
@@ -102,5 +108,16 @@ export class PlacesListComponent implements OnInit {
     const  dialogRef = this.dialog.open(EditAddPlacesComponent, {
       data: {}
     });
+
+    dialogRef.afterClosed()
+    .pipe( finalize( () => this.getData() ) )
+    .subscribe( result => {
+      if (result !== undefined) {
+        if (result === 1) {
+          this.paginator.firstPage();
+        }
+      }
+    });
+
   }
 }
