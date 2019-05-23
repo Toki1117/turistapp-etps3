@@ -6,11 +6,14 @@ import { MenuComponent } from './components/menu/menu.component';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { PlacesListComponent } from './components/places-list/places-list.component';
 import { EditAddCategoriesComponent } from './components/edit-add-categories/edit-add-categories.component';
+import { DashboardGuard } from 'src/app/guards/dashboard.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardLayoutComponent,
+    canActivate: [DashboardGuard],
+    canActivateChild: [DashboardGuard],
     children: [
       {
         path: 'inicio',

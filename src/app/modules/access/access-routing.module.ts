@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { AccessLayoutComponent } from './components/access-layout/access-layout.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AccessLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'login',
