@@ -1,1 +1,25 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>TuristApp Management</span>
+    <span class="example-spacer"></span>
+    <i
+    (click)="displayCard()"
+    class="material-icons"
+    aria-hidden="false"
+    aria-label="Example user verified icon"
+    >account_circle</i>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div [ngClass]="{'user-info': true, 'not-show': !showCard}">
+    <mat-label>{{ user?.username}}</mat-label>
+    <mat-label>{{ user?.rol }}</mat-label>
+    <button 
+      (click)="logout()"
+      class="button-logout" 
+      color="accent" 
+      mat-flat-button>
+      LOG OUT
+    </button>
+  </div>
+  <router-outlet></router-outlet>
+  

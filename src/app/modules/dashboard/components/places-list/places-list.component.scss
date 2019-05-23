@@ -1,5 +1,9 @@
 .places-list table {
   width: 100%;
+
+  label, p {
+    word-break: break-all;
+  }
 }
 
 .container {

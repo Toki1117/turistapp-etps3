@@ -37,15 +37,19 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.loginForm.markAsPending();
-    /* if (this.usuario.value === 'diana' && this.clave.value === '123' ) {
-      console.log('SUCCESS');
-      this.router.navigate(['dashboard']);
-    } */
+
     const credentials: Credentials = {
       user: this.usuario.value.trim(),
       pass: this.clave.value.trim()
+    };
+
+    if (this.usuario.value === 'diana' && this.clave.value === '123' ) {
+      console.log('SUCCESS');
+      localStorage.setItem('user', JSON.stringify({ username: 'Diana', rol: 'Aministrador' }))
+      this.router.navigate(['dashboard']);
     }
-    this.authservice.logIn(credentials)
+    
+    /* this.authservice.logIn(credentials)
     .pipe( finalize( () => this.loginForm.setErrors(null) ) )
     .subscribe( response => {
       console.log(response.username);
@@ -58,6 +62,6 @@ export class LoginComponent implements OnInit {
       }
     }, error => {
       this.snackBar.open('Tenemos problemas para loguearte');
-    });
+    }); */
   }
 }
