@@ -57,19 +57,23 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
   getData() {
     this.isLoading = true;
     // Mocking Data
-    /* this.categoriesList$ = of(ELEMENT_DATA);
+    this.categoriesList$ = of(ELEMENT_DATA);
     this.categoriesList$.subscribe( response => {
-      this.dataSource.data = response;
-    }); */
-
-    // Real Data
-    this.categoriesService.getCategories()
-    .subscribe( response => {
       this.isLoading = false;
       this.dataSource.data = response;
       this.detectChanges.detectChanges();
       this.dataSource.paginator = this.paginator;
     });
+
+    // Real Data
+    /* this.categoriesService.getCategories()
+    .pipe(tap( () =>  this.isLoading = true))
+    .subscribe( response => {
+      this.isLoading = false;
+      this.dataSource.data = response;
+      this.detectChanges.detectChanges();
+      this.dataSource.paginator = this.paginator;
+    }); */
   }
 
   addCategory() {
@@ -78,10 +82,10 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed()
-    .pipe( finalize( () => this.getData() ) )
     .subscribe( result => {
       if (result !== undefined) {
         if (result === 1) {
+          this.getData();
           this.paginator.firstPage();
         }
       }
@@ -89,17 +93,21 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
   }
 
   deleteCategory(id: number) {
-    this.categoriesService.deleteCategories(id)
-    .pipe( finalize( () => this.getData() ) )
+    this.snackBar.open('Categoria BORRADA con exito', '', {
+      duration: 2000,
+    });
+
+    // Real function
+   /*  this.categoriesService.deleteCategories(id)
     .subscribe( response =>  {
-      this.snackBar.open('Categoria borrada con exito', '', {
+      this.snackBar.open('Categoria BORRADA con exito', '', {
         duration: 2000,
       });
     }, error => {
       this.snackBar.open('ERROR: no se pudo borrar registro', '', {
         duration: 5000,
       });
-    });
+    }, () => this.getData()); */
   }
 
   editCategory(cat: Category) {
@@ -112,7 +120,8 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
     .subscribe( result => {
       if (result !== undefined) {
         if (result === 1) {
-          // CODE
+          this.getData();
+          this.paginator.firstPage();
         }
       }
     });

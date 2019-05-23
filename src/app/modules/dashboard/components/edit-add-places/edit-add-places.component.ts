@@ -9,7 +9,6 @@ import { LocationPlaceService } from 'src/app/modules/core/services/location/loc
 import { PlacesService } from 'src/app/modules/core/services/places/places.service';
 import { CategoriesService } from 'src/app/modules/core/services/categories/categories.service';
 import { Category } from 'src/app/modules/core/interfaces/category.interface';
-import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -34,8 +33,8 @@ export class EditAddPlacesComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Place ) { }
 
   ngOnInit() {
-    this.categList$ = this.categoriesService.getCategories();
-    this.municipalitiesList$ = this.localitationService.getMunicipalities();
+    /* this.categList$ = this.categoriesService.getCategories();
+    this.municipalitiesList$ = this.localitationService.getMunicipalities(); */
     //this.departmentsList$ = this.localitationService.getDepartments();
 
     this.editPlaceForm = this.fb.group({
@@ -104,7 +103,8 @@ export class EditAddPlacesComponent implements OnInit {
   }
 
   submit() {
-    this.editPlaceForm.markAsPending();
+    //this.editPlaceForm.markAsPending();
+
     const place: Place = {
       name: this.name.value.trim(),
       img_src: this.image.value.trim(),
@@ -119,17 +119,36 @@ export class EditAddPlacesComponent implements OnInit {
     };
 
     if (this.data.id !== undefined) {
-      console.log('edit', place, this.data.id);
-      //CODE 
-    } else {
-      console.log('add', place.id, place, this.data.id);
-      this.placesService.addNewPlace(place)
+      this.snackBar.open('Lugar ACTUALIZADO','', {
+        duration: 3000
+      });
+
+      /* this.placesService.editPlace(place)
       .pipe(
         finalize( () =>
           this.editPlaceForm.setErrors(null)
           )
       ).subscribe( (response: Place) => {
-        this.snackBar.open('Lugar guardado','', {
+        this.snackBar.open('Lugar ACTUALIZADO','', {
+          duration: 3000
+        });
+        this.dialogRef.close({result: 1});
+      }, error => {
+        this.snackBar.open('ERROR: el lugar no pudo actualizarse','', {
+          duration: 3000
+        });
+      }); */
+    } else {
+      this.snackBar.open('Lugar GUARDADO','', {
+        duration: 3000
+      });
+      /* this.placesService.addNewPlace(place)
+      .pipe(
+        finalize( () =>
+          this.editPlaceForm.setErrors(null)
+          )
+      ).subscribe( (response: Place) => {
+        this.snackBar.open('Lugar GUARDADO','', {
           duration: 3000
         });
         this.dialogRef.close({result: 1});
@@ -137,7 +156,7 @@ export class EditAddPlacesComponent implements OnInit {
         this.snackBar.open('ERROR: al guardar','', {
           duration: 3000
         });
-      });
+      }); */
     }
   }
 }

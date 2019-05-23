@@ -12,7 +12,7 @@ import { finalize, tap } from 'rxjs/operators';
 const ELEMENT_DATA: Place[] = [
   {id: 1, name: 'Hydrogen', description: '1.0079', img_src: 'Hsakkkkkkkkkkkkkkkkkk',location: 'sadasdsad', lat: '1212', lon: '1235', website: 'sdsad', tel: '7887878', idMunicipio: 1, idCateg: 1 },
   {id: 1, name: 'Hydrogen', description: '1.0079', img_src: 'Hsakkkkkkkkkkkkkkkkkk',location: 'sadasdsad', lat: '1212', lon: '1235', website: 'sdsad', tel: '7887878', idMunicipio: 1, idCateg: 1 },
-  {id: 1, name: 'Hydrogen', description: '1.0079', img_src: 'Hsakkkkkkkkkkkkkkkkkk',location: 'sadasdsad', lat: '1212', lon: '1235', website: 'sdsad', tel: '7887878', idMunicipio: 1, idCateg: 1 },
+  {id: 1, name: 'Hydrogen', description: '1.0079', img_src: 'Hsakkkkkkñññññññññññññññññññññññññññññññññññññññññññññññññññkkkkkkkkkkkk',location: 'sadasdsad', lat: '1212', lon: '1235', website: 'sdsad', tel: '7887878', idMunicipio: 1, idCateg: 1 },
   {id: 1, name: 'Hydrogen', description: '1.0079', img_src: 'Hsakkkkkkkkkkkkkkkkkk',location: 'sadasdsad', lat: '1212', lon: '1235', website: 'sdsad', tel: '7887878', idMunicipio: 1, idCateg: 1 },
   {id: 1, name: 'Hydrogen', description: '1.0079', img_src: 'Hsakkkkkkkkkkkkkkkkkk',location: 'sadasdsad', lat: '1212', lon: '1235', website: 'sdsad', tel: '7887878', idMunicipio: 1, idCateg: 1 },
   {id: 1, name: 'Hydrogen', description: '1.0079', img_src: 'Hsakkkkkkkkkkkkkkkkkk',location: 'sadasdsad', lat: '1212', lon: '1235', website: 'sdsad', tel: '7887878', idMunicipio: 1, idCateg: 1 },
@@ -54,29 +54,33 @@ export class PlacesListComponent implements OnInit {
   getData() {
     this.isLoading = true;
     // MOCKING DATA
-   /*  this.placesList$ = of(ELEMENT_DATA);
+    this.placesList$ = of(ELEMENT_DATA);
     this.placesList$.subscribe( response => {
+      this.isLoading = false;
       this.dataSource = new MatTableDataSource(response);
-      console.log(this.dataSource.data);
-    }); */
+      this.detectChanges.detectChanges();
+      this.dataSource.paginator = this.paginator;
+    });
 
-    this.placesService.getPlaces()
+    /* this.placesService.getPlaces()
       .subscribe( response => {
       this.isLoading = false;
       this.dataSource.data = response;
       this.detectChanges.detectChanges();
       this.dataSource.paginator = this.paginator;
-    });
+    }); */
   }
 
   deletePlace(placeId: number) {
-    this.placesService.deletePlace(placeId)
-    .pipe(
-      tap( () =>  this.isLoading = true),
-      finalize( () => this.getData() ) )
+    this.snackBar.open('Lugar BORRADO con exito', '', {
+      duration: 2000,
+    });
+
+   /*  this.placesService.deletePlace(placeId)
+    .pipe(tap( () =>  this.isLoading = true))
     .subscribe( reponse => {
       this.isLoading = false;
-      this.snackBar.open('Registro borrado exitosamente', '', {
+      this.snackBar.open('Registro BORRADO exitosamente', '', {
         duration: 3000,
       });
       this.paginator.firstPage();
@@ -84,11 +88,10 @@ export class PlacesListComponent implements OnInit {
       this.snackBar.open('ERROR: no se pudo borrar el registro', '', {
         duration: 5000,
       });
-    });
+    }, () => this.getData()); */
   }
 
   editPlace(place: Place) {
-    console.log(place);
     const  dialogRef = this.dialog.open(EditAddPlacesComponent, {
       data: place
     });
@@ -97,6 +100,7 @@ export class PlacesListComponent implements OnInit {
     .subscribe( result => {
       if (result !== undefined) {
         if (result === 1) {
+          this.getData();
           this.paginator.firstPage();
         }
       }
@@ -112,8 +116,8 @@ export class PlacesListComponent implements OnInit {
     .subscribe( result => {
       if (result !== undefined) {
         if (result === 1) {
-          this.paginator.firstPage();
           this.getData();
+          this.paginator.firstPage();
         }
       }
     });
