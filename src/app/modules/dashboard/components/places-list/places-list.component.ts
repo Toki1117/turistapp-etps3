@@ -54,29 +54,31 @@ export class PlacesListComponent implements OnInit {
   getData() {
     this.isLoading = true;
     // MOCKING DATA
-    this.placesList$ = of(ELEMENT_DATA);
+    /* this.placesList$ = of(ELEMENT_DATA);
     this.placesList$.subscribe( response => {
       this.isLoading = false;
       this.dataSource = new MatTableDataSource(response);
       this.detectChanges.detectChanges();
       this.dataSource.paginator = this.paginator;
-    });
+    }); */
 
-    /* this.placesService.getPlaces()
+    this.placesService.getPlaces()
       .subscribe( response => {
       this.isLoading = false;
       this.dataSource.data = response;
       this.detectChanges.detectChanges();
       this.dataSource.paginator = this.paginator;
-    }); */
+    });
   }
 
   deletePlace(placeId: number) {
-    this.snackBar.open('Lugar BORRADO con exito', '', {
-      duration: 2000,
-    });
 
-   /*  this.placesService.deletePlace(placeId)
+    //MOCKING DATA
+    /* this.snackBar.open('Lugar BORRADO con exito', '', {
+      duration: 2000,
+    }); */
+
+    this.placesService.deletePlace(placeId)
     .pipe(tap( () =>  this.isLoading = true))
     .subscribe( reponse => {
       this.isLoading = false;
@@ -88,7 +90,7 @@ export class PlacesListComponent implements OnInit {
       this.snackBar.open('ERROR: no se pudo borrar el registro', '', {
         duration: 5000,
       });
-    }, () => this.getData()); */
+    }, () => this.getData());
   }
 
   editPlace(place: Place) {

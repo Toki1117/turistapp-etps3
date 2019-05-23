@@ -56,24 +56,25 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
 
   getData() {
     this.isLoading = true;
+
     // Mocking Data
-    this.categoriesList$ = of(ELEMENT_DATA);
+    /* this.categoriesList$ = of(ELEMENT_DATA);
     this.categoriesList$.subscribe( response => {
       this.isLoading = false;
       this.dataSource.data = response;
       this.detectChanges.detectChanges();
       this.dataSource.paginator = this.paginator;
-    });
+    }); */
 
     // Real Data
-    /* this.categoriesService.getCategories()
+    this.categoriesService.getCategories()
     .pipe(tap( () =>  this.isLoading = true))
     .subscribe( response => {
       this.isLoading = false;
       this.dataSource.data = response;
       this.detectChanges.detectChanges();
       this.dataSource.paginator = this.paginator;
-    }); */
+    });
   }
 
   addCategory() {
@@ -93,12 +94,13 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
   }
 
   deleteCategory(id: number) {
-    this.snackBar.open('Categoria BORRADA con exito', '', {
+    // MOCK DATA
+    /* this.snackBar.open('Categoria BORRADA con exito', '', {
       duration: 2000,
-    });
+    }); */
 
     // Real function
-   /*  this.categoriesService.deleteCategories(id)
+    this.categoriesService.deleteCategories(id)
     .subscribe( response =>  {
       this.snackBar.open('Categoria BORRADA con exito', '', {
         duration: 2000,
@@ -107,7 +109,7 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
       this.snackBar.open('ERROR: no se pudo borrar registro', '', {
         duration: 5000,
       });
-    }, () => this.getData()); */
+    }, () => this.getData());
   }
 
   editCategory(cat: Category) {

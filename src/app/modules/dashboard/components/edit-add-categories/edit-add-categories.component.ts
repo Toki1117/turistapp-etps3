@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Category } from 'src/app/modules/core/interfaces/category.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoriesService } from 'src/app/modules/core/services/categories/categories.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-add-categories',
@@ -38,18 +39,21 @@ export class EditAddCategoriesComponent implements OnInit {
   }
 
   submit() {
-    //this.editCatForm.markAsPending();
+    this.editCatForm.markAsPending();
+
     const cat: Category = {
       idCateg: this.data.idCateg,
       nombre: this.name.value.trim()
     };
 
     if (this.data.idCateg !== undefined) {
-      this.snackBar.open('Categoria ACTUALIZADA exitosamente', '', {
+      
+      //MOCK DATA
+      /* this.snackBar.open('Categoria ACTUALIZADA exitosamente', '', {
         duration: 2000
-      });
+      }); */
 
-      /* this.catService.editCategories(cat)
+      this.catService.editCategories(cat)
       .pipe( finalize( () => this.editCatForm.setErrors(null)) )
       .subscribe( response => {
         this.snackBar.open('Categoria ACTUALIZADA exitosamente', '', {
@@ -61,13 +65,16 @@ export class EditAddCategoriesComponent implements OnInit {
           duration: 5000
         });
         this.dialogRef.close({result: 0});
-      }); */
-    } else {
-      this.snackBar.open('Categoria GUARDADA exitosamente', '', {
-        duration: 2000
       });
+      
+    } else {
 
-      /* this.catService.addCategories(this.name.value)
+      // MOCK DATA
+      /* this.snackBar.open('Categoria GUARDADA exitosamente', '', {
+        duration: 2000
+      }); */
+
+      this.catService.addCategories(this.name.value)
       .pipe( finalize( () => this.editCatForm.setErrors(null)) )
       .subscribe( response => {
         this.snackBar.open('Categoria GUARDADA exitosamente', '', {
@@ -79,7 +86,7 @@ export class EditAddCategoriesComponent implements OnInit {
           duration: 5000
         });
         this.dialogRef.close({result: 0});
-      }); */
+      });
     }
   }
 

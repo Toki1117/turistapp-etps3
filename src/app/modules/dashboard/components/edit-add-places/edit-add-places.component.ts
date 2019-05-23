@@ -10,6 +10,7 @@ import { PlacesService } from 'src/app/modules/core/services/places/places.servi
 import { CategoriesService } from 'src/app/modules/core/services/categories/categories.service';
 import { Category } from 'src/app/modules/core/interfaces/category.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-add-places',
@@ -33,8 +34,8 @@ export class EditAddPlacesComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Place ) { }
 
   ngOnInit() {
-    /* this.categList$ = this.categoriesService.getCategories();
-    this.municipalitiesList$ = this.localitationService.getMunicipalities(); */
+    this.categList$ = this.categoriesService.getCategories();
+    this.municipalitiesList$ = this.localitationService.getMunicipalities();
     //this.departmentsList$ = this.localitationService.getDepartments();
 
     this.editPlaceForm = this.fb.group({
@@ -103,7 +104,7 @@ export class EditAddPlacesComponent implements OnInit {
   }
 
   submit() {
-    //this.editPlaceForm.markAsPending();
+    this.editPlaceForm.markAsPending();
 
     const place: Place = {
       name: this.name.value.trim(),
@@ -119,11 +120,13 @@ export class EditAddPlacesComponent implements OnInit {
     };
 
     if (this.data.id !== undefined) {
-      this.snackBar.open('Lugar ACTUALIZADO','', {
-        duration: 3000
-      });
 
-      /* this.placesService.editPlace(place)
+      //MOCK DATA
+     /*  this.snackBar.open('Lugar ACTUALIZADO','', {
+        duration: 3000
+      }); */
+
+      this.placesService.editPlace(place)
       .pipe(
         finalize( () =>
           this.editPlaceForm.setErrors(null)
@@ -137,12 +140,15 @@ export class EditAddPlacesComponent implements OnInit {
         this.snackBar.open('ERROR: el lugar no pudo actualizarse','', {
           duration: 3000
         });
-      }); */
-    } else {
-      this.snackBar.open('Lugar GUARDADO','', {
-        duration: 3000
       });
-      /* this.placesService.addNewPlace(place)
+    } else {
+
+      //MOCK DATA
+      /* this.snackBar.open('Lugar GUARDADO','', {
+        duration: 3000
+      }); */
+
+      this.placesService.addNewPlace(place)
       .pipe(
         finalize( () =>
           this.editPlaceForm.setErrors(null)
@@ -156,7 +162,7 @@ export class EditAddPlacesComponent implements OnInit {
         this.snackBar.open('ERROR: al guardar','', {
           duration: 3000
         });
-      }); */
+      });
     }
   }
 }
