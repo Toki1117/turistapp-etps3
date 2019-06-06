@@ -31,6 +31,7 @@
     
     <mat-form-field>
       <textarea
+      maxlength="50"
       formControlName="description"
       required
       matInput
@@ -103,7 +104,8 @@
     <div class="group-form" id="contacto">
       <label for="contacto"><b>Contacto</b></label>
       <mat-form-field>
-        <input
+        <input 
+          maxlength="100"
           formControlName="website"
           required
           matInput

@@ -17,13 +17,17 @@ export class PlacesService {
   }
 
   addNewPlace(data: Place): Observable<Place>  {
-    return this.http.post<Place>(this.url + '/Lugares/Save', data);
+    const peticion = `${this.url}/lugares/save?name=${data.name}&description=${data.description}&img_src=${data.img_src}&location=${data.location}&lat=${data.lat}&lon=${data.lon}&idMunicipio=${data.idMunicipio}&website=${data.website}&tel=${data.tel}&idCateg=${data.idCateg}`;
+    console.log(peticion);
+    return this.http.post<Place>(
+      `${this.url}/lugares/save?name=${data.name}&description=${data.description}&img_src=${data.img_src}&location=${data.location}&lat=${data.lat}&lon=${data.lon}&idMunicipio=${data.idMunicipio}&website=${data.website}&tel=${data.tel}&idCateg=${data.idCateg}`, {});
   }
 
   editPlace( data: Place): Observable<Place> {
+    const peticion = `${this.url}/lugares/mod?idLugar=${data.idLugar | data.id}&name=${data.name}&description=${data.description}&img_src=${data.img_src}&location=${location}&lat=${data.lat}&lon=${data.lon}&idMunicipio=${data.idMunicipio}&website=${data.website}&tel=${data.tel}&idCateg=${data.idCateg}`;
+    console.log(peticion);
     return this.http
-    .post<Place>(
-      `${this.url}/lugares/mod?idLugar=${data.idLugar}&name=${data.name}&description=${data.description}&img_src=${data.img_src}&location=${location}&lat=${data.lat}&lon=${data.lon}&idMunicipio=${data.idMunicipio}&website=${data.website}&tel=${data.tel}&idCateg=${data.idCateg}`,
+    .post<Place>(`${this.url}/lugares/mod?idLugar=${data.idLugar | data.id}&name=${data.name}&description=${data.description}&img_src=${data.img_src}&location=${location}&lat=${data.lat}&lon=${data.lon}&idMunicipio=${data.idMunicipio}&website=${data.website}&tel=${data.tel}&idCateg=${data.idCateg}`,
        {}
     );
   }

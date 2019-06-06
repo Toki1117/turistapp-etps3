@@ -106,7 +106,7 @@ export class EditAddPlacesComponent implements OnInit {
   submit() {
     this.editPlaceForm.markAsPending();
 
-    const place: Place = {
+    let place: Place = {
       name: this.name.value.trim(),
       img_src: this.image.value.trim(),
       idCateg: this.category.value,
@@ -118,13 +118,17 @@ export class EditAddPlacesComponent implements OnInit {
       website: this.website.value.trim(),
       tel: this.tel.value.trim()
     };
-
-    if (this.data.idLugar !== undefined) {
+    
+    console.log(this.data, place);
+    if (this.data.idLugar !== undefined || this.data.id !== undefined) {
 
       //MOCK DATA
-     /*  this.snackBar.open('Lugar ACTUALIZADO','', {
+      /* this.snackBar.open('Lugar ACTUALIZADO','', {
         duration: 3000
       }); */
+      place = { ...place, idLugar: this.data.idLugar, id: this.data.id };
+
+      console.log('ACTUALIZANDO');
 
       this.placesService.editPlace(place)
       .pipe(
@@ -144,10 +148,11 @@ export class EditAddPlacesComponent implements OnInit {
     } else {
 
       //MOCK DATA
-      /* this.snackBar.open('Lugar GUARDADO','', {
+     /*  this.snackBar.open('Lugar GUARDADO','', {
         duration: 3000
       }); */
 
+      console.log('GUARDANDO');
       this.placesService.addNewPlace(place)
       .pipe(
         finalize( () =>
